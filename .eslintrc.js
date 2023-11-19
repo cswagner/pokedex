@@ -5,4 +5,4 @@ module.exports = {
     semi: ['error', 'never'],
     'react-native/no-inline-styles': 'off',
   },
-};
+}
