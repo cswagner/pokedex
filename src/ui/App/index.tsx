@@ -4,11 +4,11 @@ import {
   KeyboardAvoidingView,
   Platform,
   SafeAreaView,
-  View,
 } from 'react-native'
 import { Provider } from 'react-redux'
 import { HeaderView } from '../HeaderView'
 import { SearchView } from '../../search/ui/SearchView'
+import { PokemonView } from '../../pokemon/ui/PokemonView'
 import { AppStore, setupStore } from '../../state'
 import { useSearch } from '../../search/state/hooks'
 import { usePokemon } from '../../pokemon/state/hooks'
@@ -33,7 +33,7 @@ export const AppView: React.FC = () => {
         style={{ flex: 1 }}
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
         <HeaderView />
-        <View style={{ flex: 1, backgroundColor: 'black', opacity: 0.25 }} />
+        <PokemonView state={pokemon.state} />
         <SearchView
           query={search.query}
           onQueryChange={search.updateQuery}
