@@ -1,8 +1,10 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import { searchReducer } from '../search/state'
+import { pokemonReducer } from '../pokemon/state'
 
 const reducer = combineReducers({
   search: searchReducer,
+  pokemon: pokemonReducer,
 })
 
 export const setupStore = (preloadedState?: AppState) =>

@@ -11,6 +11,7 @@ import { HeaderView } from '../HeaderView'
 import { SearchView } from '../../search/ui/SearchView'
 import { AppStore, setupStore } from '../../state'
 import { useSearch } from '../../search/state/hooks'
+import { usePokemon } from '../../pokemon/state/hooks'
 
 interface Props {
   store?: AppStore
@@ -23,7 +24,8 @@ export const App: React.FC<Props> = ({ store = setupStore() }) => (
 )
 
 export const AppView: React.FC = () => {
-  const { query, updateQuery } = useSearch()
+  const search = useSearch()
+  const pokemon = usePokemon()
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: 'red' }}>
@@ -33,10 +35,11 @@ export const AppView: React.FC = () => {
         <HeaderView />
         <View style={{ flex: 1, backgroundColor: 'black', opacity: 0.25 }} />
         <SearchView
-          query={query}
-          onQueryChange={updateQuery}
+          query={search.query}
+          onQueryChange={search.updateQuery}
           onSubmit={() => {
             Keyboard.dismiss()
+            pokemon.fetchByName(search.query)
           }}
         />
       </KeyboardAvoidingView>
