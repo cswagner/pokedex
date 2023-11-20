@@ -2,6 +2,7 @@ import React from 'react'
 import { View } from 'react-native'
 import { SearchQueryInputView } from '../SearchQueryInputView'
 import { SearchButtonView } from '../SearchButtonView'
+import { SearchHistoryToggleView } from '../SearchHistoryToggleView'
 
 interface Props {
   query: string
@@ -9,6 +10,9 @@ interface Props {
   onSubmit: () => void
   queryInputTestID?: string
   buttonTestID?: string
+  isHistoryEnabled: boolean
+  onHistoryToggle: () => void
+  historyButtonTestID?: string
 }
 
 export const SearchView: React.FC<Props> = ({
@@ -17,6 +21,9 @@ export const SearchView: React.FC<Props> = ({
   onSubmit,
   queryInputTestID,
   buttonTestID,
+  isHistoryEnabled,
+  onHistoryToggle,
+  historyButtonTestID,
 }) => (
   <View
     style={{
@@ -33,5 +40,10 @@ export const SearchView: React.FC<Props> = ({
       testID={queryInputTestID}
     />
     <SearchButtonView onPress={onSubmit} testID={buttonTestID} />
+    <SearchHistoryToggleView
+      isEnabled={isHistoryEnabled}
+      onToggle={onHistoryToggle}
+      buttonTestID={historyButtonTestID}
+    />
   </View>
 )

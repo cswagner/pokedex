@@ -17,17 +17,20 @@ interface Props {
   store?: AppStore
   searchQueryInputTestID?: string
   searchButtonTestID?: string
+  searchHistoryButtonTestID?: string
 }
 
 export const App: React.FC<Props> = ({
   store = setupStore(),
   searchQueryInputTestID,
   searchButtonTestID,
+  searchHistoryButtonTestID,
 }) => (
   <Provider store={store}>
     <AppView
       searchQueryInputTestID={searchQueryInputTestID}
       searchButtonTestID={searchButtonTestID}
+      searchHistoryButtonTestID={searchHistoryButtonTestID}
     />
   </Provider>
 )
@@ -35,6 +38,7 @@ export const App: React.FC<Props> = ({
 export const AppView: React.FC<Omit<Props, 'store'>> = ({
   searchQueryInputTestID,
   searchButtonTestID,
+  searchHistoryButtonTestID,
 }) => {
   const search = useSearch()
   const pokemon = usePokemon()
@@ -53,8 +57,11 @@ export const AppView: React.FC<Omit<Props, 'store'>> = ({
             Keyboard.dismiss()
             pokemon.fetchByName(search.query)
           }}
+          isHistoryEnabled={false}
+          onHistoryToggle={() => {}}
           queryInputTestID={searchQueryInputTestID}
           buttonTestID={searchButtonTestID}
+          historyButtonTestID={searchHistoryButtonTestID}
         />
       </KeyboardAvoidingView>
     </SafeAreaView>
