@@ -111,13 +111,17 @@ exports[`App search on error should show an error: default 1`] = `
         />
         <Text
           style={
-            {
-              "backgroundColor": "#333333",
-              "color": "white",
-              "padding": 16,
-              "textAlign": "center",
-              "width": "75%",
-            }
+            [
+              {
+                "width": "75%",
+              },
+              {
+                "backgroundColor": "#333333",
+                "color": "white",
+                "padding": 16,
+                "textAlign": "center",
+              },
+            ]
           }
         />
       </View>
@@ -405,13 +409,17 @@ exports[`App search on error should show an error: error 1`] = `
         </View>
         <Text
           style={
-            {
-              "backgroundColor": "#333333",
-              "color": "white",
-              "padding": 16,
-              "textAlign": "center",
-              "width": "75%",
-            }
+            [
+              {
+                "width": "75%",
+              },
+              {
+                "backgroundColor": "#333333",
+                "color": "white",
+                "padding": 16,
+                "textAlign": "center",
+              },
+            ]
           }
         />
       </View>
@@ -699,13 +707,17 @@ exports[`App search on error should show an error: loading 1`] = `
         </View>
         <Text
           style={
-            {
-              "backgroundColor": "#333333",
-              "color": "white",
-              "padding": 16,
-              "textAlign": "center",
-              "width": "75%",
-            }
+            [
+              {
+                "width": "75%",
+              },
+              {
+                "backgroundColor": "#333333",
+                "color": "white",
+                "padding": 16,
+                "textAlign": "center",
+              },
+            ]
           }
         />
       </View>
@@ -988,13 +1000,17 @@ exports[`App search on success should load Pokemon: default 1`] = `
         />
         <Text
           style={
-            {
-              "backgroundColor": "#333333",
-              "color": "white",
-              "padding": 16,
-              "textAlign": "center",
-              "width": "75%",
-            }
+            [
+              {
+                "width": "75%",
+              },
+              {
+                "backgroundColor": "#333333",
+                "color": "white",
+                "padding": 16,
+                "textAlign": "center",
+              },
+            ]
           }
         />
       </View>
@@ -1282,13 +1298,17 @@ exports[`App search on success should load Pokemon: loading 1`] = `
         </View>
         <Text
           style={
-            {
-              "backgroundColor": "#333333",
-              "color": "white",
-              "padding": 16,
-              "textAlign": "center",
-              "width": "75%",
-            }
+            [
+              {
+                "width": "75%",
+              },
+              {
+                "backgroundColor": "#333333",
+                "color": "white",
+                "padding": 16,
+                "textAlign": "center",
+              },
+            ]
           }
         />
       </View>
@@ -1571,13 +1591,17 @@ exports[`App search on success should load Pokemon: success 1`] = `
         />
         <Text
           style={
-            {
-              "backgroundColor": "#333333",
-              "color": "white",
-              "padding": 16,
-              "textAlign": "center",
-              "width": "75%",
-            }
+            [
+              {
+                "width": "75%",
+              },
+              {
+                "backgroundColor": "#333333",
+                "color": "white",
+                "padding": 16,
+                "textAlign": "center",
+              },
+            ]
           }
         >
           #123 SOME NAME
