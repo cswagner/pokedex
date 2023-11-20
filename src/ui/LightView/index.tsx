@@ -14,7 +14,7 @@ export const LightView: React.FC<Props> = ({ color, radius }) => (
       height: radius * 2,
       borderRadius: radius,
       borderWidth: 2,
-      borderColor: 'white',
+      borderColor: 'lightgray',
     }}
   />
 )
