@@ -15,15 +15,27 @@ import { usePokemon } from '../../pokemon/state/hooks'
 
 interface Props {
   store?: AppStore
+  searchQueryInputTestID?: string
+  searchButtonTestID?: string
 }
 
-export const App: React.FC<Props> = ({ store = setupStore() }) => (
+export const App: React.FC<Props> = ({
+  store = setupStore(),
+  searchQueryInputTestID,
+  searchButtonTestID,
+}) => (
   <Provider store={store}>
-    <AppView />
+    <AppView
+      searchQueryInputTestID={searchQueryInputTestID}
+      searchButtonTestID={searchButtonTestID}
+    />
   </Provider>
 )
 
-export const AppView: React.FC = () => {
+export const AppView: React.FC<Omit<Props, 'store'>> = ({
+  searchQueryInputTestID,
+  searchButtonTestID,
+}) => {
   const search = useSearch()
   const pokemon = usePokemon()
 
@@ -41,6 +53,8 @@ export const AppView: React.FC = () => {
             Keyboard.dismiss()
             pokemon.fetchByName(search.query)
           }}
+          queryInputTestID={searchQueryInputTestID}
+          buttonTestID={searchButtonTestID}
         />
       </KeyboardAvoidingView>
     </SafeAreaView>
