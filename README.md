@@ -32,6 +32,7 @@ Once the JavaScript dependencies are installed, run the following commands to in
 
 ```bash
 cd ios
+bundle install
 bundle exec pod install
 ```
 
