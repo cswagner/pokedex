@@ -30,6 +30,7 @@ describe('App', () => {
             store={store}
             searchQueryInputTestID="search-query-input"
             searchButtonTestID="search-button"
+            searchHistoryButtonTestID="search-history-button"
           />,
         )
 
@@ -50,6 +51,14 @@ describe('App', () => {
         await advanceTimeBy(200)
 
         expect(rendered.toJSON()).toMatchSnapshot('success')
+
+        const searchHistoryButton = await rendered.findByTestId(
+          'search-history-button',
+        )
+
+        fireEvent(searchHistoryButton, 'press')
+
+        expect(rendered.toJSON()).toMatchSnapshot('history')
       })
     })
 
@@ -72,6 +81,7 @@ describe('App', () => {
             store={store}
             searchQueryInputTestID="search-query-input"
             searchButtonTestID="search-button"
+            searchHistoryButtonTestID="search-history-button"
           />,
         )
 
@@ -92,6 +102,14 @@ describe('App', () => {
         await advanceTimeBy(200)
 
         expect(rendered.toJSON()).toMatchSnapshot('error')
+
+        const searchHistoryButton = await rendered.findByTestId(
+          'search-history-button',
+        )
+
+        fireEvent(searchHistoryButton, 'press')
+
+        expect(rendered.toJSON()).toMatchSnapshot('history')
       })
     })
   })
