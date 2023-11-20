@@ -9,6 +9,7 @@ import { Provider } from 'react-redux'
 import { HeaderView } from '../HeaderView'
 import { SearchView } from '../../search/ui/SearchView'
 import { PokemonView } from '../../pokemon/ui/PokemonView'
+import { SearchHistoryView } from '../../search/ui/SearchHistoryView'
 import { AppStore, setupStore } from '../../state'
 import { useSearch } from '../../search/state/hooks'
 import { usePokemon } from '../../pokemon/state/hooks'
@@ -49,7 +50,11 @@ export const AppView: React.FC<Omit<Props, 'store'>> = ({
         style={{ flex: 1 }}
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
         <HeaderView />
-        <PokemonView state={pokemon.state} />
+        {search.isHistoryEnabled ? (
+          <SearchHistoryView history={search.history} />
+        ) : (
+          <PokemonView state={pokemon.state} />
+        )}
         <SearchView
           query={search.query}
           onQueryChange={search.updateQuery}
