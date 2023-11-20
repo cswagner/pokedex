@@ -2207,7 +2207,17 @@ exports[`App search on success should load Pokemon: success 1`] = `
               "width": "75%",
             }
           }
-        />
+        >
+          <Image
+            height={192}
+            source={
+              {
+                "uri": "https://www.example.com",
+              }
+            }
+            width={192}
+          />
+        </View>
         <Text
           style={
             [

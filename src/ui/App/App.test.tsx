@@ -9,15 +9,23 @@ jest.useFakeTimers()
 describe('App', () => {
   describe('search', () => {
     describe('on success', () => {
-      const response = {
-        id: '123',
-        name: 'Some Name',
-      }
-
       beforeEach(() => {
-        fetchMock.mockResponse(() =>
-          delay(300).then(() => JSON.stringify(response)),
-        )
+        fetchMock
+          .mockResponseOnce(() =>
+            delay(300).then(() =>
+              JSON.stringify({
+                id: '123',
+                name: 'Some Name',
+              }),
+            ),
+          )
+          .mockResponseOnce(() =>
+            delay(300).then(() =>
+              JSON.stringify({
+                sprites: { front_default: 'https://www.example.com' },
+              }),
+            ),
+          )
       })
 
       it('should load Pokemon', async () => {
@@ -114,6 +122,8 @@ describe('App', () => {
     })
   })
 })
+
+afterEach(() => fetchMock.resetMocks())
 
 const delay: (duration: number) => Promise<void> = duration =>
   new Promise(resolve => setTimeout(resolve, duration))
