@@ -1,10 +1,24 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import {
+  createAsyncThunk,
+  createListenerMiddleware,
+  createSlice,
+  PayloadAction,
+} from '@reduxjs/toolkit'
+import { SearchHistoryGateway } from '../gateways/SearchHistoryGateway'
+import { DiskSearchHistoryGatewayImpl } from '../gateways/DiskSearchHistoryGatewayImpl'
 
 interface SearchState {
   query: string
   history: string[]
+  persistedHistory?: string[]
   isHistoryEnabled: boolean
 }
+
+const historyGateway: SearchHistoryGateway = new DiskSearchHistoryGatewayImpl()
+const fetchHistory = createAsyncThunk(
+  'search/fetchHistory',
+  historyGateway.history,
+)
 
 const slice = createSlice({
   name: 'search',
@@ -24,6 +38,25 @@ const slice = createSlice({
       state.isHistoryEnabled = !state.isHistoryEnabled
     },
   },
+  extraReducers: builder => {
+    builder
+      .addCase(fetchHistory.fulfilled, (state, action) => {
+        state.persistedHistory = action.payload
+      })
+      .addCase(fetchHistory.rejected, state => {
+        state.persistedHistory = []
+      })
+  },
 })
 
-export const { reducer: searchReducer, actions: searchActions } = slice
+const listenerMiddleware = createListenerMiddleware()
+listenerMiddleware.startListening({
+  actionCreator: slice.actions.addQueryToHistory,
+  effect: action => {
+    historyGateway.add(action.payload)
+  },
+})
+
+export const { reducer: searchReducer } = slice
+export const { middleware: searchMiddleware } = listenerMiddleware
+export const searchActions = { ...slice.actions, fetchHistory }

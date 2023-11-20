@@ -30,7 +30,12 @@ describe('App', () => {
 
       it('should load Pokemon', async () => {
         const store = setupStore({
-          search: { query: '', history: [], isHistoryEnabled: false },
+          search: {
+            query: '',
+            history: [],
+            persistedHistory: [],
+            isHistoryEnabled: false,
+          },
           pokemon: { type: 'default' },
         })
         const rendered = render(
@@ -81,7 +86,12 @@ describe('App', () => {
 
       it('should show an error', async () => {
         const store = setupStore({
-          search: { query: '', history: [], isHistoryEnabled: false },
+          search: {
+            query: '',
+            history: [],
+            persistedHistory: [],
+            isHistoryEnabled: false,
+          },
           pokemon: { type: 'default' },
         })
         const rendered = render(

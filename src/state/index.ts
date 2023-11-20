@@ -1,5 +1,5 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
-import { searchReducer } from '../search/state'
+import { searchMiddleware, searchReducer } from '../search/state'
 import { pokemonReducer } from '../pokemon/state'
 
 const reducer = combineReducers({
@@ -8,7 +8,12 @@ const reducer = combineReducers({
 })
 
 export const setupStore = (preloadedState?: AppState) =>
-  configureStore({ reducer, preloadedState })
+  configureStore({
+    reducer,
+    middleware: getDefaultMiddleware =>
+      getDefaultMiddleware().prepend(searchMiddleware),
+    preloadedState,
+  })
 
 export type AppState = ReturnType<typeof reducer>
 export type AppStore = ReturnType<typeof setupStore>
