@@ -9,6 +9,7 @@
 - [Formatting](#formatting)
 - [Linting](#linting)
 - [Testing](#testing)
+- [Type-checking](#type-checking)
 - [Troubleshooting](#troubleshooting)
 
 ## Getting Started
@@ -92,6 +93,16 @@ Run tests with the following command:
 
 ```bash
 npm test
+```
+
+## Type-checking
+
+Type-checking is powered by [TypeScript](https://www.typescriptlang.org/).
+
+Check for type violations with the following command:
+
+```bash
+npm run tsc
 ```
 
 ## Troubleshooting
