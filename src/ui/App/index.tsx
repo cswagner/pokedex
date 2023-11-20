@@ -56,9 +56,13 @@ export const AppView: React.FC<Omit<Props, 'store'>> = ({
           onSubmit={() => {
             Keyboard.dismiss()
             pokemon.fetchByName(search.query)
+            search.addQueryToHistory(search.query)
           }}
-          isHistoryEnabled={false}
-          onHistoryToggle={() => {}}
+          isHistoryEnabled={search.isHistoryEnabled}
+          onHistoryToggle={() => {
+            Keyboard.dismiss()
+            search.toggleHistory()
+          }}
           queryInputTestID={searchQueryInputTestID}
           buttonTestID={searchButtonTestID}
           historyButtonTestID={searchHistoryButtonTestID}
