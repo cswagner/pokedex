@@ -13,6 +13,7 @@
 - [Troubleshooting](#troubleshooting)
 - [Thoughts](#thoughts)
   - [On Additional Pokemon Details](#on-additional-pokemon-details)
+  - [On Considerations for Concurrent Environment](#on-considerations-for-concurrent-environment)
 
 ## Getting Started
 
@@ -137,3 +138,11 @@ Each new search query submission currently makes a request to both the `/pokemon
 - Update `src/pokemon/gateway/NetworkPokemonGatewayImpl#byName` to grab the value from either the `/pokemon` or `/pokemon-species` response
 - Update `src/pokemon/ui/PokemonView` to render the detail
 - Stub the value from the `/pokemon` or `/pokemon-species` response in the mocked successtul response in `src/ui/App/App.test`
+
+### On Considerations for Concurrent Environment
+
+A concurrent environment is assumed to mean one in which (many) users are interacting with the mobile application in parallel. In this type of environment, limiting unnecessary traffic is paramount to allow the backend to scale. Unnecessary traffic could be pruned by:
+
+- Validating, solely in the mobile application, search queries that are destined to fail (e.g., blank queries)
+- Caching Pokemon details to disk on the mobile device with a generous expiration, assuming the details do not change frequently
+- Having the mobile application communicate with a proxy for the [PokeAPI](https://pokeapi.co/), rather than directly, with its own cache, allowing the backend to scale independently
