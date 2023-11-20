@@ -1,5 +1,5 @@
 import React from 'react'
-import { ActivityIndicator, ScrollView, View } from 'react-native'
+import { ActivityIndicator, Image, ScrollView, View } from 'react-native'
 import { PokemonState } from '../../state'
 import ErrorIcon from '../../../../assets/images/error.svg'
 import { TextView } from '../../../ui/TextView'
@@ -31,6 +31,15 @@ export const PokemonView: React.FC<Props> = ({ state }) => (
         <ActivityIndicator color="white" size="large" />
       )}
       {state.type === 'error' && <ErrorIcon width={48} height={48} />}
+      {state.type === 'success' && (
+        <Image
+          width={192}
+          height={192}
+          source={{
+            uri: state.pokemon.imageUrl,
+          }}
+        />
+      )}
     </View>
     <TextView
       style={{ width: '75%' }}
