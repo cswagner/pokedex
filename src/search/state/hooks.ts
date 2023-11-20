@@ -1,4 +1,4 @@
-import { useCallback } from 'react'
+import { useCallback, useEffect, useMemo } from 'react'
 import { useAppDispatch, useAppSelector } from '../../state/hooks'
 import { searchActions } from '.'
 
@@ -12,7 +12,10 @@ export const useSearch: () => {
 } = () => {
   const dispatch = useAppDispatch()
   const query = useAppSelector(state => state.search.query)
-  const history = useAppSelector(state => state.search.history)
+  const localHistory = useAppSelector(state => state.search.history)
+  const persistedHistory = useAppSelector(
+    state => state.search.persistedHistory,
+  )
   const isHistoryEnabled = useAppSelector(
     state => state.search.isHistoryEnabled,
   )
@@ -34,6 +37,17 @@ export const useSearch: () => {
   const toggleHistory = useCallback(() => {
     dispatch(searchActions.toggleHistory())
   }, [dispatch])
+
+  const history = useMemo(
+    () => [...(persistedHistory ?? []), ...localHistory].reverse(),
+    [persistedHistory, localHistory],
+  )
+
+  useEffect(() => {
+    if (!persistedHistory) {
+      dispatch(searchActions.fetchHistory())
+    }
+  }, [dispatch, persistedHistory])
 
   return {
     query,
