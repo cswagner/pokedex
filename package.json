@@ -26,6 +26,7 @@
     "@react-native/metro-config": "^0.72.11",
     "@testing-library/react-native": "^12.4.0",
     "@tsconfig/react-native": "^3.0.0",
+    "@types/jest": "^29.5.8",
     "@types/react": "^18.0.24",
     "babel-jest": "^29.2.1",
     "eslint": "^8.19.0",
