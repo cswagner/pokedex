@@ -7,6 +7,7 @@
   - [Step 2: Start the Metro Server](#step-2-start-the-metro-server)
   - [Step 3: Start the Application](#step-3-start-the-application)
 - [Formatting](#formatting)
+- [Linting](#linting)
 - [Troubleshooting](#troubleshooting)
 
 ## Getting Started
@@ -70,6 +71,16 @@ Format violations automatically with the following command:
 
 ```bash
 npm run format
+```
+
+## Linting
+
+Linting is managed by [ESLint](https://eslint.org/).
+
+Check for violations with the following command:
+
+```bash
+npm run lint
 ```
 
 ## Troubleshooting
