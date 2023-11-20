@@ -13,6 +13,7 @@
 - [Troubleshooting](#troubleshooting)
 - [Thoughts](#thoughts)
   - [On Additional Pokemon Details](#on-additional-pokemon-details)
+  - [On Pokemon Evolutions](#on-pokemon-evolutions)
   - [On Considerations for Concurrent Environment](#on-considerations-for-concurrent-environment)
 
 ## Getting Started
@@ -138,6 +139,16 @@ Each new search query submission currently makes a request to both the `/pokemon
 - Update `src/pokemon/gateway/NetworkPokemonGatewayImpl#byName` to grab the value from either the `/pokemon` or `/pokemon-species` response
 - Update `src/pokemon/ui/PokemonView` to render the detail
 - Stub the value from the `/pokemon` or `/pokemon-species` response in the mocked successtul response in `src/ui/App/App.test`
+
+### On Pokemon Evolutions
+
+Each new search query submission currently makes a request to the `/pokemon-species` endpoint on the [PokeAPI](https://pokeapi.co/) for a subset of the Pokemon's details. The response to that request includes an `evolution_chain` representing the Pokemon's evolution tree. This tree could be added by:
+
+- Make a sequential request to to the `evolution_chain` URL upon a successful reponse from the `/pokemon-species` endpoint
+- Construct the Pokemon's evolution tree by following the `evolves_to` field in the response from the `/evolution_chain` request
+  - Each node will correspond to the `species.url` value in each `evolves_to` item
+  - Leaf nodes in the tree will have `evolves_to` set to an empty array
+- Add the ability to navigate between nodes in `src/pokemon/ui/PokemonView`, requesting Pokemon details as necessary from the `species.url` value
 
 ### On Considerations for Concurrent Environment
 
