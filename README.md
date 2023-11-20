@@ -57,4 +57,20 @@ This is one way to run the app — you can also run it directly from within Andr
 
 ## Troubleshooting
 
+### iOS
+
+If you run into the following error while trying to build the project with Xcode,
+
+```
+React-rncore: PhaseScriptExecution failed with nonzero exit code
+```
+
+ensure a _ios/.xcode.env.local_ file exists which exports the path to your Node.js binary.
+
+```bash
+export NODE_BINARY="/path/to/node"
+```
+
+### Other
+
 If you run into issues, check out the [React Native troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
