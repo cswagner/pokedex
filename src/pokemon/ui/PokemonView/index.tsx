@@ -1,7 +1,8 @@
 import React from 'react'
-import { ActivityIndicator, ScrollView, Text, View } from 'react-native'
+import { ActivityIndicator, ScrollView, View } from 'react-native'
 import { PokemonState } from '../../state'
 import ErrorIcon from '../../../../assets/images/error.svg'
+import { TextView } from '../../../ui/TextView'
 
 interface Props {
   state: PokemonState
@@ -31,17 +32,13 @@ export const PokemonView: React.FC<Props> = ({ state }) => (
       )}
       {state.type === 'error' && <ErrorIcon width={48} height={48} />}
     </View>
-    <Text
-      style={{
-        width: '75%',
-        padding: 16,
-        backgroundColor: '#333333',
-        color: 'white',
-        textAlign: 'center',
-      }}>
-      {state.type === 'success'
-        ? `#${state.pokemon.id} ${state.pokemon.name.toUpperCase()}`
-        : ''}
-    </Text>
+    <TextView
+      style={{ width: '75%' }}
+      text={
+        state.type === 'success'
+          ? `#${state.pokemon.id} ${state.pokemon.name.toUpperCase()}`
+          : ''
+      }
+    />
   </ScrollView>
 )

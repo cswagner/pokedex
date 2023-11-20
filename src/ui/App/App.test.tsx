@@ -22,7 +22,7 @@ describe('App', () => {
 
       it('should load Pokemon', async () => {
         const store = setupStore({
-          search: { query: '' },
+          search: { query: '', history: [], isHistoryEnabled: false },
           pokemon: { type: 'default' },
         })
         const rendered = render(
@@ -30,6 +30,7 @@ describe('App', () => {
             store={store}
             searchQueryInputTestID="search-query-input"
             searchButtonTestID="search-button"
+            searchHistoryButtonTestID="search-history-button"
           />,
         )
 
@@ -50,6 +51,14 @@ describe('App', () => {
         await advanceTimeBy(200)
 
         expect(rendered.toJSON()).toMatchSnapshot('success')
+
+        const searchHistoryButton = await rendered.findByTestId(
+          'search-history-button',
+        )
+
+        fireEvent(searchHistoryButton, 'press')
+
+        expect(rendered.toJSON()).toMatchSnapshot('history')
       })
     })
 
@@ -64,7 +73,7 @@ describe('App', () => {
 
       it('should show an error', async () => {
         const store = setupStore({
-          search: { query: '' },
+          search: { query: '', history: [], isHistoryEnabled: false },
           pokemon: { type: 'default' },
         })
         const rendered = render(
@@ -72,6 +81,7 @@ describe('App', () => {
             store={store}
             searchQueryInputTestID="search-query-input"
             searchButtonTestID="search-button"
+            searchHistoryButtonTestID="search-history-button"
           />,
         )
 
@@ -92,6 +102,14 @@ describe('App', () => {
         await advanceTimeBy(200)
 
         expect(rendered.toJSON()).toMatchSnapshot('error')
+
+        const searchHistoryButton = await rendered.findByTestId(
+          'search-history-button',
+        )
+
+        fireEvent(searchHistoryButton, 'press')
+
+        expect(rendered.toJSON()).toMatchSnapshot('history')
       })
     })
   })
