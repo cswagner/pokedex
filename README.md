@@ -1,79 +1,159 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# Pokedex
 
-# Getting Started
+## Table of Contents
 
-> **Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+- [Getting Started](#getting-started)
+  - [Step 1: Install Dependencies](#step-1-install-dependencies)
+  - [Step 2: Start the Metro Server](#step-2-start-the-metro-server)
+  - [Step 3: Start the Application](#step-3-start-the-application)
+- [Formatting](#formatting)
+- [Linting](#linting)
+- [Testing](#testing)
+- [Type-checking](#type-checking)
+- [Troubleshooting](#troubleshooting)
+- [Thoughts](#thoughts)
+  - [On Additional Pokemon Details](#on-additional-pokemon-details)
+  - [On Pokemon Evolutions](#on-pokemon-evolutions)
+  - [On Considerations for Concurrent Environment](#on-considerations-for-concurrent-environment)
 
-## Step 1: Start the Metro Server
+## Getting Started
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+> **Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions 'til "Creating a new application" step, before proceeding.
 
-To start Metro, run the following command from the _root_ of your React Native project:
+### Step 1: Install Dependencies
+
+First, you will need to install necessary dependencies. Run the following command from the _root_ of the project to install JavaScript dependencies:
 
 ```bash
-# using npm
+npm install
+```
+
+Once the JavaScript dependencies are installed, run the following commands to install native iOS dependencies:
+
+```bash
+cd ios
+bundle exec pod install
+```
+
+### Step 2: Start the Metro Server
+
+Once all dependencies are installed, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native. Run the following command from the _root_ of the project to start Metro:
+
+```bash
 npm start
-
-# OR using Yarn
-yarn start
 ```
 
-## Step 2: Start your Application
+### Step 3: Start the Application
 
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
+Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of the project. Run the following command to start the _Android_ or _iOS_ app:
 
-### For Android
+#### For Android
 
 ```bash
-# using npm
 npm run android
-
-# OR using Yarn
-yarn android
 ```
 
-### For iOS
+#### For iOS
 
 ```bash
-# using npm
 npm run ios
-
-# OR using Yarn
-yarn ios
 ```
 
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
+If everything is set up _correctly_, you should see the app running in the _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
 
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
+This is one way to run the app — you can also run it directly from within Android Studio and Xcode respectively.
 
-## Step 3: Modifying your App
+## Formatting
 
-Now that you have successfully run the app, let's modify it.
+Code formatting is managed by [Prettier](https://prettier.io/).
 
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
+Check that the code adherees to the formatting standards with the following command:
 
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
+```bash
+npm run check-format
+```
 
-## Congratulations! :tada:
+Format violations automatically with the following command:
 
-You've successfully run and modified your React Native App. :partying_face:
+```bash
+npm run format
+```
 
-### Now what?
+## Linting
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
+Linting is managed by [ESLint](https://eslint.org/).
 
-# Troubleshooting
+Check for violations with the following command:
 
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
+```bash
+npm run lint
+```
 
-# Learn More
+## Testing
 
-To learn more about React Native, take a look at the following resources:
+Automated tests are run via [Jest](https://jestjs.io/).
 
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+Run tests with the following command:
+
+```bash
+npm test
+```
+
+## Type-checking
+
+Type-checking is powered by [TypeScript](https://www.typescriptlang.org/).
+
+Check for type violations with the following command:
+
+```bash
+npm run tsc
+```
+
+## Troubleshooting
+
+### iOS
+
+If you run into the following error while trying to build the project with Xcode,
+
+```
+React-rncore: PhaseScriptExecution failed with nonzero exit code
+```
+
+ensure a _ios/.xcode.env.local_ file exists which exports the path to your Node.js binary.
+
+```bash
+export NODE_BINARY="/path/to/node"
+```
+
+### Other
+
+If you run into issues, check out the [React Native troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
+
+## Thoughts
+
+### On Additional Pokemon Details
+
+Each new search query submission currently makes a request to both the `/pokemon` and `/pokemon-species` endpoints on the [PokeAPI](https://pokeapi.co/) in parallel, combining the results to provide the Pokemon ID, name, and front-facing sprite. Additonal details could be added with the following steps:
+
+- Add a field for the detail to the `src/pokemon/Pokemon` type
+- Update `src/pokemon/gateway/NetworkPokemonGatewayImpl#byName` to grab the value from either the `/pokemon` or `/pokemon-species` response
+- Update `src/pokemon/ui/PokemonView` to render the detail
+- Stub the value from the `/pokemon` or `/pokemon-species` response in the mocked successtul response in `src/ui/App/App.test`
+
+### On Pokemon Evolutions
+
+Each new search query submission currently makes a request to the `/pokemon-species` endpoint on the [PokeAPI](https://pokeapi.co/) for a subset of the Pokemon's details. The response to that request includes an `evolution_chain` representing the Pokemon's evolution tree. This tree could be added by:
+
+- Make a sequential request to to the `evolution_chain` URL upon a successful reponse from the `/pokemon-species` endpoint
+- Construct the Pokemon's evolution tree by following the `evolves_to` field in the response from the `/evolution_chain` request
+  - Each node will correspond to the `species.url` value in each `evolves_to` item
+  - Leaf nodes in the tree will have `evolves_to` set to an empty array
+- Add the ability to navigate between nodes in `src/pokemon/ui/PokemonView`, requesting Pokemon details as necessary from the `species.url` value
+
+### On Considerations for Concurrent Environment
+
+A concurrent environment is assumed to mean one in which (many) users are interacting with the mobile application in parallel. In this type of environment, limiting unnecessary traffic is paramount to allow the backend to scale. Unnecessary traffic could be pruned by:
+
+- Validating, solely in the mobile application, search queries that are destined to fail (e.g., blank queries)
+- Caching Pokemon details to disk on the mobile device with a generous expiration, assuming the details do not change frequently
+- Having the mobile application communicate with a proxy for the [PokeAPI](https://pokeapi.co/), rather than directly, with its own cache, allowing the backend to scale independently
