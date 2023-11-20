@@ -11,6 +11,8 @@
 - [Testing](#testing)
 - [Type-checking](#type-checking)
 - [Troubleshooting](#troubleshooting)
+- [Thoughts](#thoughts)
+  - [On Additional Pokemon Details](#on-additional-pokemon-details)
 
 ## Getting Started
 
@@ -124,3 +126,14 @@ export NODE_BINARY="/path/to/node"
 ### Other
 
 If you run into issues, check out the [React Native troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
+
+## Thoughts
+
+### On Additional Pokemon Details
+
+Each new search query submission currently makes a request to both the `/pokemon` and `/pokemon-species` endpoints on the [PokeAPI](https://pokeapi.co/) in parallel, combining the results to provide the Pokemon ID, name, and front-facing sprite. Additonal details could be added with the following steps:
+
+- Add a field for the detail to the `src/pokemon/Pokemon` type
+- Update `src/pokemon/gateway/NetworkPokemonGatewayImpl#byName` to grab the value from either the `/pokemon` or `/pokemon-species` response
+- Update `src/pokemon/ui/PokemonView` to render the detail
+- Stub the value from the `/pokemon` or `/pokemon-species` response in the mocked successtul response in `src/ui/App/App.test`
