@@ -8,6 +8,7 @@
   - [Step 3: Start the Application](#step-3-start-the-application)
 - [Formatting](#formatting)
 - [Linting](#linting)
+- [Testing](#testing)
 - [Troubleshooting](#troubleshooting)
 
 ## Getting Started
@@ -81,6 +82,16 @@ Check for violations with the following command:
 
 ```bash
 npm run lint
+```
+
+## Testing
+
+Automated tests are run via [Jest](https://jestjs.io/).
+
+Run tests with the following command:
+
+```bash
+npm test
 ```
 
 ## Troubleshooting
