@@ -22,4 +22,8 @@ export class DiskSearchHistoryGatewayImpl implements SearchHistoryGateway {
     history.push(query)
     this.mmkv.set(key, JSON.stringify(history))
   }
+
+  clear: () => Promise<void> = async () => {
+    this.mmkv.delete(key)
+  }
 }

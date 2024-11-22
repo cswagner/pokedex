@@ -9,6 +9,7 @@ export const useSearch: () => {
   isHistoryEnabled: boolean
   addQueryToHistory: (text: string) => void
   toggleHistory: () => void
+  clearHistory: () => void
 } = () => {
   const dispatch = useAppDispatch()
   const query = useAppSelector(state => state.search.query)
@@ -38,6 +39,10 @@ export const useSearch: () => {
     dispatch(searchActions.toggleHistory())
   }, [dispatch])
 
+  const clearHistory = useCallback(() => {
+    dispatch(searchActions.clearHistory())
+  }, [dispatch])
+
   const history = useMemo(
     () => [...(persistedHistory ?? []), ...localHistory].reverse(),
     [persistedHistory, localHistory],
@@ -56,5 +61,6 @@ export const useSearch: () => {
     isHistoryEnabled,
     addQueryToHistory,
     toggleHistory,
+    clearHistory,
   }
 }

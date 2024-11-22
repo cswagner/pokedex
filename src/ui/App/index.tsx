@@ -68,6 +68,7 @@ export const AppView: React.FC<Omit<Props, 'store'>> = ({
             Keyboard.dismiss()
             search.toggleHistory()
           }}
+          onHistoryClear={search.clearHistory}
           queryInputTestID={searchQueryInputTestID}
           buttonTestID={searchButtonTestID}
           historyButtonTestID={searchHistoryButtonTestID}

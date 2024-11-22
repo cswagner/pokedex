@@ -37,6 +37,10 @@ const slice = createSlice({
     toggleHistory: state => {
       state.isHistoryEnabled = !state.isHistoryEnabled
     },
+    clearHistory: state => {
+      state.history = []
+      state.persistedHistory = []
+    },
   },
   extraReducers: builder => {
     builder
@@ -54,6 +58,12 @@ listenerMiddleware.startListening({
   actionCreator: slice.actions.addQueryToHistory,
   effect: action => {
     historyGateway.add(action.payload)
+  },
+})
+listenerMiddleware.startListening({
+  actionCreator: slice.actions.clearHistory,
+  effect: () => {
+    historyGateway.clear()
   },
 })
 

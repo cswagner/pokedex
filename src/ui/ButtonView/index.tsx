@@ -8,6 +8,7 @@ interface Props {
   color?: string
   radius?: number
   onPress?: () => void
+  onLongPress?: () => void
   testID?: string
 }
 
@@ -16,9 +17,10 @@ export const ButtonView: React.FC<PropsWithChildren<Props>> = ({
   radius = defaultRadius,
   children,
   onPress,
+  onLongPress,
   testID,
 }) => (
-  <TouchableOpacity onPress={onPress} testID={testID}>
+  <TouchableOpacity onPress={onPress} onLongPress={onLongPress} testID={testID}>
     <View
       style={{
         width: radius * 2,
