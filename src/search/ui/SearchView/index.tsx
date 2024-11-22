@@ -7,6 +7,7 @@ import { SearchHistoryToggleView } from '../SearchHistoryToggleView'
 interface Props {
   query: string
   onQueryChange: (text: string) => void
+  onQueryClear: () => void
   onSubmit: () => void
   queryInputTestID?: string
   buttonTestID?: string
@@ -19,6 +20,7 @@ interface Props {
 export const SearchView: React.FC<Props> = ({
   query,
   onQueryChange,
+  onQueryClear,
   onSubmit,
   queryInputTestID,
   buttonTestID,
@@ -41,7 +43,11 @@ export const SearchView: React.FC<Props> = ({
       onSubmit={onSubmit}
       testID={queryInputTestID}
     />
-    <SearchButtonView onPress={onSubmit} testID={buttonTestID} />
+    <SearchButtonView
+      onPress={onSubmit}
+      onLongPress={onQueryClear}
+      testID={buttonTestID}
+    />
     <SearchHistoryToggleView
       isEnabled={isHistoryEnabled}
       onToggle={onHistoryToggle}
