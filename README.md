@@ -11,10 +11,6 @@
 - [Testing](#testing)
 - [Type-checking](#type-checking)
 - [Troubleshooting](#troubleshooting)
-- [Thoughts](#thoughts)
-  - [On Additional Pokemon Details](#on-additional-pokemon-details)
-  - [On Pokemon Evolutions](#on-pokemon-evolutions)
-  - [On Considerations for Concurrent Environment](#on-considerations-for-concurrent-environment)
 
 ## Getting Started
 
@@ -129,32 +125,3 @@ export NODE_BINARY="/path/to/node"
 ### Other
 
 If you run into issues, check out the [React Native troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-## Thoughts
-
-### On Additional Pokemon Details
-
-Each new search query submission currently makes a request to both the `/pokemon` and `/pokemon-species` endpoints on the [PokeAPI](https://pokeapi.co/) in parallel, combining the results to provide the Pokemon ID, name, and front-facing sprite. Additonal details could be added with the following steps:
-
-- Add a field for the detail to the `src/pokemon/Pokemon` type
-- Update `src/pokemon/gateway/NetworkPokemonGatewayImpl#byName` to grab the value from either the `/pokemon` or `/pokemon-species` response
-- Update `src/pokemon/ui/PokemonView` to render the detail
-- Stub the value from the `/pokemon` or `/pokemon-species` response in the mocked successtul response in `src/ui/App/App.test`
-
-### On Pokemon Evolutions
-
-Each new search query submission currently makes a request to the `/pokemon-species` endpoint on the [PokeAPI](https://pokeapi.co/) for a subset of the Pokemon's details. The response to that request includes an `evolution_chain` representing the Pokemon's evolution tree. This tree could be added by:
-
-- Make a sequential request to to the `evolution_chain` URL upon a successful reponse from the `/pokemon-species` endpoint
-- Construct the Pokemon's evolution tree by following the `evolves_to` field in the response from the `/evolution_chain` request
-  - Each node will correspond to the `species.url` value in each `evolves_to` item
-  - Leaf nodes in the tree will have `evolves_to` set to an empty array
-- Add the ability to navigate between nodes in `src/pokemon/ui/PokemonView`, requesting Pokemon details as necessary from the `species.url` value
-
-### On Considerations for Concurrent Environment
-
-A concurrent environment is assumed to mean one in which (many) users are interacting with the mobile application in parallel. In this type of environment, limiting unnecessary traffic is paramount to allow the backend to scale. Unnecessary traffic could be pruned by:
-
-- Validating, solely in the mobile application, search queries that are destined to fail (e.g., blank queries)
-- Caching Pokemon details to disk on the mobile device with a generous expiration, assuming the details do not change frequently
-- Having the mobile application communicate with a proxy for the [PokeAPI](https://pokeapi.co/), rather than directly, with its own cache, allowing the backend to scale independently
