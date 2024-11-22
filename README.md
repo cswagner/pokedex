@@ -1,7 +1,10 @@
 # Pokedex
 
+A Pokedex mobile app written in React Native.
+
 ## Table of Contents
 
+- [Screenshots](#screenshots)
 - [Getting Started](#getting-started)
   - [Step 1: Install Dependencies](#step-1-install-dependencies)
   - [Step 2: Start the Metro Server](#step-2-start-the-metro-server)
@@ -11,6 +14,47 @@
 - [Testing](#testing)
 - [Type-checking](#type-checking)
 - [Troubleshooting](#troubleshooting)
+
+## Screenshots
+
+### Searching
+
+<table>
+  <tr>
+    <th>Android</th>
+    <th>iOS</th>
+  </tr>
+  <tr>
+    <td><img width="200" src="screenshots/android-search.png"></th>
+    <td><img width="200" src="screenshots/ios-search.png"></th>
+  </tr>
+</table>
+
+### Search Result
+
+<table>
+  <tr>
+    <th>Android</th>
+    <th>iOS</th>
+  </tr>
+  <tr>
+    <td><img width="200" src="screenshots/android-search-result.png"></th>
+    <td><img width="200" src="screenshots/ios-search-result.png"></th>
+  </tr>
+</table>
+
+### Search History
+
+<table>
+  <tr>
+    <th>Android</th>
+    <th>iOS</th>
+  </tr>
+  <tr>
+    <td><img width="200" src="screenshots/android-search-history.png"></th>
+    <td><img width="200" src="screenshots/ios-search-history.png"></th>
+  </tr>
+</table>
 
 ## Getting Started
 
