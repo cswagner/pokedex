@@ -6,12 +6,14 @@ import { LightView } from '../../../ui/LightView'
 interface Props {
   isEnabled: boolean
   onToggle: () => void
+  onClear: () => void
   buttonTestID?: string
 }
 
 export const SearchHistoryToggleView: React.FC<Props> = ({
   isEnabled,
   onToggle,
+  onClear,
   buttonTestID,
 }) => (
   <View
@@ -23,7 +25,11 @@ export const SearchHistoryToggleView: React.FC<Props> = ({
       borderRadius: 8,
       columnGap: 8,
     }}>
-    <SearchHistoryButtonView onPress={onToggle} testID={buttonTestID} />
+    <SearchHistoryButtonView
+      onPress={onToggle}
+      onLongPress={onClear}
+      testID={buttonTestID}
+    />
     <LightView color={isEnabled ? 'orange' : 'black'} radius={8} />
   </View>
 )

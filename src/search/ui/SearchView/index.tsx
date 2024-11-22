@@ -12,6 +12,7 @@ interface Props {
   buttonTestID?: string
   isHistoryEnabled: boolean
   onHistoryToggle: () => void
+  onHistoryClear: () => void
   historyButtonTestID?: string
 }
 
@@ -23,6 +24,7 @@ export const SearchView: React.FC<Props> = ({
   buttonTestID,
   isHistoryEnabled,
   onHistoryToggle,
+  onHistoryClear,
   historyButtonTestID,
 }) => (
   <View
@@ -43,6 +45,7 @@ export const SearchView: React.FC<Props> = ({
     <SearchHistoryToggleView
       isEnabled={isHistoryEnabled}
       onToggle={onHistoryToggle}
+      onClear={onHistoryClear}
       buttonTestID={historyButtonTestID}
     />
   </View>
