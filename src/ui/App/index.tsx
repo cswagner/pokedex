@@ -58,6 +58,7 @@ export const AppView: React.FC<Omit<Props, 'store'>> = ({
         <SearchView
           query={search.query}
           onQueryChange={search.updateQuery}
+          onQueryClear={() => search.updateQuery('')}
           onSubmit={() => {
             Keyboard.dismiss()
             pokemon.fetchByName(search.query)
